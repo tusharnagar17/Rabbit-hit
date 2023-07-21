@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hit-Rabbit</title>
+    <style>
+        body{
+            display: flex;
+        }
+        .playground{
+            position: relative;
+            width: 700px;
+            height: 500px;
+            background-color: yellowgreen;
+            margin: 0 10px 0 10px;
+        }
+        #rabbit-img{
+            position: relative;
+            height: 100px;
+        }
+    </style>
+    <script>
+        let GameStatus = false;
+        let hitCount=0;
+        const stat = document.getElementById("status");
+        function counterADD(){
+            if(GameStatus){
+            hitCount++;
+            document.getElementById("hitCount").innerText =hitCount;
+            }
+        }
+        function StartGame(){
+            let stat = document.getElementById("status");
+            stat.innerText = "Game is running" 
+            GameStatus = true;
+            let timeCount = 30;
+            let rabbit = document.getElementById("rabbit-img");
+            let time = setInterval(()=>{
+                let i = Math.floor(Math.random()*400)+1;
+                let j = Math.floor(Math.random()*400)+1;
+                rabbit.style.left = i+"px";
+                rabbit.style.top = j+"px";
+                timeCount--;
+                document.getElementById("TimeDisplay").innerText = timeCount+"sec";  
+
+            },1000);
+
+           
+            let timeinterval = setInterval(()=>{
+               
+            },1000);
+            
+            setTimeout(()=>{
+                clearTimeout(time);
+                stat.innerText = "Game Over";
+            },30000)
+        }
+
+
+    </script>
+</head>
+<body>
+    <div class="playground">
+        <img id="rabbit-img" onclick="counterADD()" src="rabbit.png">
+    </div>    
+    <div class="menu">
+        <div>
+            <h1>
+            <div id="status">Click to start the game</div>
+            <div id="TimeDisplay">30</div>
+            <span>Total Hit => </span>
+            <span id="hitCount"></span>
+            </h1>
+        </div>
+        <div class="buttons">
+            <button onclick="StartGame()">Start Game</button>
+            <!-- <button onclick="ResetGame()">Reset Game</button> -->
+        </div>
+    </div>
+</body>
+</html>
